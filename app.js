@@ -8,13 +8,15 @@ var app         = express();
 var bodyParser  = require('body-parser');
 var http		= require('http');
 var request     = require('request');
+var router      = express.Router();
+
+console.log(router);
 
 //Set port to 8080
 var port        = process.env.PORT || 8080;
 
 //Specify routes
 router.route('/')
-//Called when a user navigates to the home page
 .get(function(req, res){
 	request({
 			url: 'https://messagingApi.Sinch.com/v1/sms/13109386046',
@@ -52,6 +54,8 @@ router.route('/')
 	).end();
     res.status(200);
 })
+
+app.use(router);
 
 //Start app
 app.listen(port);
