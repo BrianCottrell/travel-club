@@ -1,0 +1,15 @@
+{
+  "name": "travel-club",
+  "version": "1.0.0",
+  "description": "Launch Hackathon Entry",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Brian Cottrell",
+  "license": "ISC",
+  "dependencies": {
+    "express": "~4.0.0",
+    "body-parser": "~1.0.1"
+  }  
+}

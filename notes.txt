@@ -1,0 +1,8 @@
+hHloxcWENIyQ34LK1vBP40sndQDHXAvx
+C4G0UAPEHEhSvUYM
+
+
+curl --user "application\f7931164-fc50-4b82-85bb-ef49da97e04f:usyJl2Ri/0eEbOvtoBv0ww==" --data '{"message":"Hello"}' -H 'Content-Type: application/json'
+https://messagingapi.sinch.com/v1/sms/+13109386046
+
+6646ab62-5920-4274-b30e-cfce7d9f45bf:4QJFR6lJck8I1JJtwLVc/M3VgPzj9rL0tExOnE7x7u0=
