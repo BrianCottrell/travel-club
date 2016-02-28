@@ -14,12 +14,17 @@ var port        = process.env.PORT || 8080;
 
 var hotelList;
 
-//Specify routes
-router.route('/')
-.get(function(req, res){
+app.use(router);
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
+
+app.post('/hotel', function(req, res){
+	var arrive = req.body.arrive;
+	var depart = req.body.depart;
+	var region = req.body.region;
 	http.request({
 			host: 'terminal2.expedia.com',
-			path: '/x/hotels?regionids=5921&radius=5km&dates=2016-05-19,2016-05-22&apikey=hHloxcWENIyQ34LK1vBP40sndQDHXAvx'
+			path: '/x/hotels?regionids='+region+'&radius=5km&dates='+arrive+','+depart+'&apikey=hHloxcWENIyQ34LK1vBP40sndQDHXAvx'
 		}, 
 		function(res){
 			var str = '';
@@ -54,32 +59,39 @@ router.route('/')
 			});
 		}
 	).end();
-	console.log('Get Request Recieved')
+	console.log('Post Request Recieved');
     res.status(200);
-});
+})
 
-// create reusable transporter object using the default SMTP transport
-var transporter = nodemailer.createTransport('smtps://user%40gmail.com:pass@smtp.gmail.com');
+router.route('/email').post(function(req, res){
+	console.log(hotelList);
+	var transporter = nodemailer.createTransport({
+        service: 'Gmail',
+        auth: {
+            user: 'hacker1323@iocodelabs.com', // Your email id
+            pass: 'onak6cemu2' // Your password
+        }
+    });
 
-// setup e-mail data with unicode symbols
-var mailOptions = {
-    from: '"Brian Cottrell" <Brian.Cottrell0@gmail.com>', // sender address
-    to: 'Brian_Cottrell@inbox.com', // list of receivers
-    subject: 'Hello ✔', // Subject line
-    text: 'Hello world 🐴', // plaintext body
-    html: '<b>Hello world 🐴</b>' // html body
-};
+    var mailOptions = {
+	    from: 'hacker1323@iocodelabs.com', // sender address
+	    to: 'Brian_Cottrell@inbox.com', // list of receivers
+	    subject: 'You have a new booking request from FL1GHT CLUB', // Subject line
+	    text: 'Here is the clients top 3 choices: 'hotelList //, // plaintext body
+	    // html: '<b>Hello world ✔</b>' // You can choose to send an HTML body instead
+	};
 
-// send mail with defined transport object
-transporter.sendMail(mailOptions, function(error, info){
-    if(error){
-        return console.log(error);
-    }
-    console.log('Message sent: ' + info.response);
-});
-
-app.use(router);
-app.use(bodyParser.json());
+	transporter.sendMail(mailOptions, function(error, info){
+	    if(error){
+	        console.log(error);
+	        res.json({yo: 'error'});
+	    }else{
+	        console.log('Message sent: ' + info.response);
+	        res.json({yo: info.response});
+	    };
+	});
+	res.status(200);
+})
 
 //Start app
 app.listen(port);
