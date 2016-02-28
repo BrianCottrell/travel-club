@@ -1,6 +1,7 @@
 {
   "name": "travel-club",
   "version": "1.0.0",
+    "private": true,
   "description": "Launch Hackathon Entry",
   "main": "app.js",
   "scripts": {
@@ -8,8 +9,17 @@
   },
   "author": "Brian Cottrell",
   "license": "ISC",
+  "engines": {
+    "node": "~4.2"
+  },
+  "scripts": {
+    "start": "node app.js",
+    "monitor": "nodemon app.js",
+    "deploy": "gcloud preview app deploy"
+  },
   "dependencies": {
     "express": "~4.0.0",
-    "body-parser": "~1.0.1"
+    "body-parser": "~1.0.1",
+    "request": "~2.69.0"
   }  
 }
