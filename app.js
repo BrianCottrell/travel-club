@@ -77,7 +77,7 @@ router.route('/email').post(function(req, res){
 	    from: 'hacker1323@iocodelabs.com', // sender address
 	    to: 'Brian_Cottrell@inbox.com', // list of receivers
 	    subject: 'You have a new booking request from FL1GHT CLUB', // Subject line
-	    text: 'Here is the clients top 3 choices: 'hotelList //, // plaintext body
+	    text: 'Here is the clients top 3 choices: '+hotelList //, // plaintext body
 	    // html: '<b>Hello world ✔</b>' // You can choose to send an HTML body instead
 	};
 
